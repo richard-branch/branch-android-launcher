@@ -38,7 +38,6 @@ import com.android.launcher3.ExtendedEditText;
 import com.android.launcher3.Insettable;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.R;
-import com.android.launcher3.allapps.AllAppsContainerView;
 import com.android.launcher3.allapps.AllAppsStore;
 import com.android.launcher3.allapps.AlphabeticalAppsList;
 import com.android.launcher3.allapps.SearchUiManager;
@@ -46,6 +45,8 @@ import com.android.launcher3.graphics.TintedDrawableSpan;
 import com.android.launcher3.util.ComponentKey;
 
 import java.util.ArrayList;
+
+import io.branch.search.widget.AllAppsContainerView;
 
 /**
  * Layout to contain the All-apps search UI.
@@ -99,13 +100,15 @@ public class AppsSearchContainerLayout extends ExtendedEditText
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        mLauncher.getAppsView().getAppsStore().addUpdateListener(this);
+// branch-removed
+//        mLauncher.getAppsView().getAppsStore().addUpdateListener(this);
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        mLauncher.getAppsView().getAppsStore().removeUpdateListener(this);
+// branch-removed
+//        mLauncher.getAppsView().getAppsStore().removeUpdateListener(this);
     }
 
     @Override
@@ -113,8 +116,9 @@ public class AppsSearchContainerLayout extends ExtendedEditText
         // Update the width to match the grid padding
         DeviceProfile dp = mLauncher.getDeviceProfile();
         int myRequestedWidth = getSize(widthMeasureSpec);
-        int rowWidth = myRequestedWidth - mAppsView.getActiveRecyclerView().getPaddingLeft()
-                - mAppsView.getActiveRecyclerView().getPaddingRight();
+        int rowWidth = 64;
+// branch-removed
+// myRequestedWidth - mAppsView.getActiveRecyclerView().getPaddingLeft() - mAppsView.getActiveRecyclerView().getPaddingRight();
 
         int cellWidth = DeviceProfile.calculateCellWidth(rowWidth, dp.inv.numHotseatIcons);
         int iconVisibleSize = Math.round(ICON_VISIBLE_AREA_FACTOR * dp.iconSizePx);
@@ -139,7 +143,8 @@ public class AppsSearchContainerLayout extends ExtendedEditText
 
     @Override
     public void initialize(AllAppsContainerView appsView) {
-        mApps = appsView.getApps();
+// branch-removed
+//        mApps = appsView.getApps();
         mAppsView = appsView;
         mSearchBarController.initialize(
                 new DefaultAppSearchAlgorithm(mApps.getApps()), this, mLauncher, this);

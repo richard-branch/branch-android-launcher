@@ -32,6 +32,8 @@ import com.android.launcher3.Utilities;
 import com.android.launcher3.pageindicators.PageIndicator;
 import com.android.launcher3.util.Themes;
 
+import io.branch.search.widget.AllAppsContainerView;
+
 /**
  * Supports two indicator colors, dedicated for personal and work tabs.
  */
@@ -157,7 +159,8 @@ public class PersonalWorkSlidingTabStrip extends LinearLayout implements PageInd
     public void setActiveMarker(int activePage) {
         updateTabTextColor(activePage);
         if (mContainerView != null && mLastActivePage != activePage) {
-            mContainerView.onTabChanged(activePage);
+// branch-removed
+//            mContainerView.onTabChanged(activePage);
         }
         mLastActivePage = activePage;
     }

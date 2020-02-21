@@ -9,6 +9,7 @@ import com.android.launcher3.AbstractFloatingView;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherState;
 import com.android.launcher3.LauncherStateManager.AnimationComponents;
+import com.android.launcher3.R;
 import com.android.launcher3.touch.AbstractStateChangeTouchController;
 import com.android.launcher3.touch.SwipeDetector;
 import com.android.launcher3.userevent.nano.LauncherLogProto.ContainerType;
@@ -40,7 +41,7 @@ public class AllAppsSwipeController extends AbstractStateChangeTouchController {
             // Don't listen for the swipe gesture if we are already in some other state.
             return false;
         }
-        if (mLauncher.isInState(ALL_APPS) && !mLauncher.getAppsView().shouldContainerScroll(ev)) {
+        if (mLauncher.isInState(ALL_APPS) && mLauncher.getAppsView().isScrolled()) {
             return false;
         }
         return true;

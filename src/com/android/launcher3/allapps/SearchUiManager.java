@@ -17,6 +17,8 @@ package com.android.launcher3.allapps;
 
 import android.view.KeyEvent;
 
+import io.branch.search.widget.AllAppsContainerView;
+
 /**
  * Interface for controlling the Apps search UI.
  */

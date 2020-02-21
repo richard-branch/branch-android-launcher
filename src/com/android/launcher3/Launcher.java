@@ -76,7 +76,6 @@ import android.widget.Toast;
 import com.android.launcher3.DropTarget.DragObject;
 import com.android.launcher3.Workspace.ItemOperator;
 import com.android.launcher3.accessibility.LauncherAccessibilityDelegate;
-import com.android.launcher3.allapps.AllAppsContainerView;
 import com.android.launcher3.allapps.AllAppsTransitionController;
 import com.android.launcher3.allapps.DiscoveryBounce;
 import com.android.launcher3.badge.BadgeInfo;
@@ -139,6 +138,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import io.branch.search.widget.AllAppsContainerView;
 
 /**
  * Default launcher application.
@@ -208,7 +209,8 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
     private DropTargetBar mDropTargetBar;
 
     // Main container view for the all apps screen.
-    @Thunk AllAppsContainerView mAppsView;
+    @Thunk
+    AllAppsContainerView mAppsView;
     AllAppsTransitionController mAllAppsController;
 
     // UI and state for the overview panel
@@ -638,8 +640,9 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
     }
 
     @Override
-    public void onActivityResult(
-            final int requestCode, final int resultCode, final Intent data) {
+    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
         handleActivityResult(requestCode, resultCode, data);
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.onActivityResult(requestCode, resultCode, data);
@@ -1113,7 +1116,8 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
 
     public void updateIconBadges(final Set<PackageUserKey> updatedBadges) {
         mWorkspace.updateIconBadges(updatedBadges);
-        mAppsView.getAppsStore().updateIconBadges(updatedBadges);
+        // branch-removed
+        // mAppsView.getAppsStore().updateIconBadges(updatedBadges);
 
         PopupContainerWithArrow popup = PopupContainerWithArrow.getOpen(Launcher.this);
         if (popup != null) {
@@ -2107,8 +2111,9 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
         }
         mPendingExecutor = executor;
         if (!isInState(ALL_APPS)) {
-            mAppsView.getAppsStore().setDeferUpdates(true);
-            mPendingExecutor.execute(() -> mAppsView.getAppsStore().setDeferUpdates(false));
+// branch-removed
+//            mAppsView.getAppsStore().setDeferUpdates(true);
+//            mPendingExecutor.execute(() -> mAppsView.getAppsStore().setDeferUpdates(false));
         }
 
         executor.attachTo(this);
@@ -2181,7 +2186,8 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
      * Implementation of the method from LauncherModel.Callbacks.
      */
     public void bindAllApplications(ArrayList<AppInfo> apps) {
-        mAppsView.getAppsStore().setApps(apps);
+// branch-removed
+//        mAppsView.getAppsStore().setApps(apps);
 
         if (mLauncherCallbacks != null) {
             mLauncherCallbacks.bindAllApplications(apps);
@@ -2204,12 +2210,14 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
      */
     @Override
     public void bindAppsAddedOrUpdated(ArrayList<AppInfo> apps) {
-        mAppsView.getAppsStore().addOrUpdateApps(apps);
+// branch-removed
+//        mAppsView.getAppsStore().addOrUpdateApps(apps);
     }
 
     @Override
     public void bindPromiseAppProgressUpdated(PromiseAppInfo app) {
-        mAppsView.getAppsStore().updatePromiseAppProgress(app);
+// branch-removed
+//        mAppsView.getAppsStore().updatePromiseAppProgress(app);
     }
 
     @Override
@@ -2255,7 +2263,8 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
 
     @Override
     public void bindAppInfosRemoved(final ArrayList<AppInfo> appInfos) {
-        mAppsView.getAppsStore().removeApps(appInfos);
+// branch-removed
+//        mAppsView.getAppsStore().removeApps(appInfos);
     }
 
     @Override

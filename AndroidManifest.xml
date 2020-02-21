@@ -61,6 +61,10 @@
         android:restoreAnyVersion="true"
         android:supportsRtl="true" >
 
+        <meta-data
+            android:name="io.branch.sdk.BranchKey"
+            android:value="key_live_ekzqC49363HuS7qlHunMQfnnzyj4F1jr" />
+
         <!--
         Main launcher activity. When extending only change the name, and keep all the
         attributes and intent filters the same
@@ -85,6 +89,10 @@
                 <category android:name="android.intent.category.LAUNCHER_APP" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="io.branch.search.widget.optin.BranchOptInActivity"
+            android:theme="@style/BranchOptIn.Theme" />
 
         <!--
         The settings activity. When extending keep the intent filter present

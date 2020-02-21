@@ -32,6 +32,8 @@ import com.android.launcher3.anim.PropertySetter;
 import com.android.launcher3.util.Themes;
 import com.android.launcher3.views.ScrimView;
 
+import io.branch.search.widget.AllAppsContainerView;
+
 /**
  * Handles AllApps view transition.
  * 1) Slides all apps view using direct manipulation
@@ -118,6 +120,11 @@ public class AllAppsTransitionController implements StateHandler, OnDeviceProfil
      */
     public void setProgress(float progress) {
         mProgress = progress;
+
+        if (mProgress < 1 && mAppsView.isFragmentHidden()) {
+            mAppsView.showFragment();
+        }
+
         mScrimView.setProgress(progress);
         float shiftCurrent = progress * mShiftRange;
 
@@ -138,6 +145,8 @@ public class AllAppsTransitionController implements StateHandler, OnDeviceProfil
         } else {
             mLauncher.getSystemUiController().updateUiState(UI_STATE_ALL_APPS, 0);
         }
+
+        mLauncher.getAppsView().setAlpha(1 - mProgress);
     }
 
     public float getProgress() {
@@ -163,6 +172,11 @@ public class AllAppsTransitionController implements StateHandler, OnDeviceProfil
     public void setStateWithAnimation(LauncherState toState,
             AnimatorSetBuilder builder, AnimationConfig config) {
         float targetProgress = toState.getVerticalProgress(mLauncher);
+
+        if (Float.compare(targetProgress, 1f) == 0) {
+            mAppsView.hideKeyboard();
+        }
+
         if (Float.compare(mProgress, targetProgress) == 0) {
             setAlphas(toState, config.getPropertySetter(builder));
             // Fail fast
@@ -195,10 +209,11 @@ public class AllAppsTransitionController implements StateHandler, OnDeviceProfil
         boolean hasHeaderExtra = (visibleElements & ALL_APPS_HEADER_EXTRA) != 0;
         boolean hasContent = (visibleElements & ALL_APPS_CONTENT) != 0;
 
-        setter.setViewAlpha(mAppsView.getSearchView(), hasHeader ? 1 : 0, LINEAR);
-        setter.setViewAlpha(mAppsView.getContentView(), hasContent ? 1 : 0, LINEAR);
-        setter.setViewAlpha(mAppsView.getScrollBar(), hasContent ? 1 : 0, LINEAR);
-        mAppsView.getFloatingHeaderView().setContentVisibility(hasHeaderExtra, hasContent, setter);
+// branch-removed
+//        setter.setViewAlpha(mAppsView.getSearchView(), hasHeader ? 1 : 0, LINEAR);
+//        setter.setViewAlpha(mAppsView.getContentView(), hasContent ? 1 : 0, LINEAR);
+//        setter.setViewAlpha(mAppsView.getScrollBar(), hasContent ? 1 : 0, LINEAR);
+//        mAppsView.getFloatingHeaderView().setContentVisibility(hasHeaderExtra, hasContent, setter);
 
         setter.setInt(mScrimView, ScrimView.DRAG_HANDLE_ALPHA,
                 (visibleElements & VERTICAL_SWIPE_INDICATOR) != 0 ? 255 : 0, LINEAR);
@@ -242,10 +257,16 @@ public class AllAppsTransitionController implements StateHandler, OnDeviceProfil
     private void onProgressAnimationEnd() {
         if (Float.compare(mProgress, 1f) == 0) {
             mAppsView.setVisibility(View.INVISIBLE);
-            mAppsView.reset(false /* animate */);
+            mAppsView.reset(false);
+
+            mAppsView.hideFragment();
         } else if (Float.compare(mProgress, 0f) == 0) {
             mAppsView.setVisibility(View.VISIBLE);
             mAppsView.onScrollUpEnd();
+
+            mAppsView.resetToInitialState();
+
+            mAppsView.showFragment();
         } else {
             mAppsView.setVisibility(View.VISIBLE);
         }

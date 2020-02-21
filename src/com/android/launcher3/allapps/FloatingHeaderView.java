@@ -90,15 +90,16 @@ public class FloatingHeaderView extends LinearLayout implements
         mTabLayout = findViewById(R.id.tabs);
     }
 
-    public void setup(AllAppsContainerView.AdapterHolder[] mAH, boolean tabsHidden) {
-        mTabsHidden = tabsHidden;
-        mTabLayout.setVisibility(tabsHidden ? View.GONE : View.VISIBLE);
-        mMainRV = setupRV(mMainRV, mAH[AllAppsContainerView.AdapterHolder.MAIN].recyclerView);
-        mWorkRV = setupRV(mWorkRV, mAH[AllAppsContainerView.AdapterHolder.WORK].recyclerView);
-        mParent = (ViewGroup) mMainRV.getParent();
-        setMainActive(mMainRVActive || mWorkRV == null);
-        reset(false);
-    }
+// branch-removed
+//    public void setup(AllAppsContainerView.AdapterHolder[] mAH, boolean tabsHidden) {
+//        mTabsHidden = tabsHidden;
+//        mTabLayout.setVisibility(tabsHidden ? View.GONE : View.VISIBLE);
+//        mMainRV = setupRV(mMainRV, mAH[AllAppsContainerView.AdapterHolder.MAIN].recyclerView);
+//        mWorkRV = setupRV(mWorkRV, mAH[AllAppsContainerView.AdapterHolder.WORK].recyclerView);
+//        mParent = (ViewGroup) mMainRV.getParent();
+//        setMainActive(mMainRVActive || mWorkRV == null);
+//        reset(false);
+//    }
 
     private AllAppsRecyclerView setupRV(AllAppsRecyclerView old, AllAppsRecyclerView updated) {
         if (old != updated && updated != null ) {
