@@ -68,10 +68,11 @@ public class AllAppsContainerView extends RelativeLayout implements DragSource {
     public void fillInLogContainerData(View v, ItemInfo info, LauncherLogProto.Target target, LauncherLogProto.Target targetParent) {
     }
 
-// empty functions to remove copile errors
     public void reset(boolean animate) {
+        branchSearchFragment.updateQuery("");
     }
 
+// empty functions to remove copile errors
     public void onScrollUpEnd() {
     }
 
