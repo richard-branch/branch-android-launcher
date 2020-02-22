@@ -139,10 +139,8 @@ dependencies {
     annotationProcessor 'androidx.room:room-compiler:2.2.0'
 
     // Branch UI dependencies - other
-    implementation 'io.branch.sdk.android:search:1.4.1'
-    implementation 'io.branch.sdk.android:library:3.2.0'
+    implementation 'io.branch.sdk.android:search:1.5.1'
     implementation 'com.facebook.fresco:fresco:1.12.1'
-    implementation 'com.facebook.shimmer:shimmer:0.4.0'
     implementation 'com.squareup.okhttp3:okhttp:3.12.6'
 
     quickstepImplementation fileTree(dir: "quickstep/libs", include: 'sysui_shared.jar')
