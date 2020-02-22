@@ -121,13 +121,10 @@ public class AllAppsTransitionController implements StateHandler, OnDeviceProfil
     public void setProgress(float progress) {
         mProgress = progress;
 
-        if (mProgress < 1 && mAppsView.isFragmentHidden()) {
-            mAppsView.showFragment();
-        }
-
         mScrimView.setProgress(progress);
         float shiftCurrent = progress * mShiftRange;
 
+        mAppsView.notifyOpen(mProgress == 0F);
         mAppsView.setTranslationY(shiftCurrent);
         float hotseatTranslation = -mShiftRange + shiftCurrent;
 
@@ -172,10 +169,6 @@ public class AllAppsTransitionController implements StateHandler, OnDeviceProfil
     public void setStateWithAnimation(LauncherState toState,
             AnimatorSetBuilder builder, AnimationConfig config) {
         float targetProgress = toState.getVerticalProgress(mLauncher);
-
-        if (Float.compare(targetProgress, 1f) == 0) {
-            mAppsView.hideKeyboard();
-        }
 
         if (Float.compare(mProgress, targetProgress) == 0) {
             setAlphas(toState, config.getPropertySetter(builder));
@@ -258,15 +251,9 @@ public class AllAppsTransitionController implements StateHandler, OnDeviceProfil
         if (Float.compare(mProgress, 1f) == 0) {
             mAppsView.setVisibility(View.INVISIBLE);
             mAppsView.reset(false);
-
-            mAppsView.hideFragment();
         } else if (Float.compare(mProgress, 0f) == 0) {
             mAppsView.setVisibility(View.VISIBLE);
             mAppsView.onScrollUpEnd();
-
-            mAppsView.resetToInitialState();
-
-            mAppsView.showFragment();
         } else {
             mAppsView.setVisibility(View.VISIBLE);
         }

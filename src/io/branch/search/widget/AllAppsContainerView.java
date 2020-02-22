@@ -50,65 +50,8 @@ public class AllAppsContainerView extends RelativeLayout implements DragSource {
                 .commit();
     }
 
-    public void hideFragment() {
-        Fragment branchDiscoveryFragment = branchSearchFragment.getChildFragmentManager().findFragmentById(R.id.branchapp_fragment_container);
-
-        if (branchDiscoveryFragment != null) {
-            branchSearchFragment.getChildFragmentManager().beginTransaction()
-                    .hide(branchDiscoveryFragment)
-                    .commit();
-        }
-    }
-
-    public void showFragment() {
-        Fragment branchDiscoveryFragment = branchSearchFragment.getChildFragmentManager().findFragmentById(R.id.branchapp_fragment_container);
-
-        if (branchDiscoveryFragment != null) {
-            branchSearchFragment.getChildFragmentManager().beginTransaction()
-                    .show(branchDiscoveryFragment)
-                    .commit();
-        }
-    }
-
-    public boolean isFragmentHidden() {
-        Fragment branchDiscoveryFragment = branchSearchFragment.getChildFragmentManager().findFragmentById(R.id.branchapp_fragment_container);
-
-        if (branchDiscoveryFragment != null) {
-            return branchDiscoveryFragment.isHidden();
-        }
-
-        return false;
-    }
-
-    public void resetToInitialState() {
-        View scrollView = findViewById(R.id.branchapp_results_view);
-        EditText editText = findViewById(R.id.branchapp_edit_text);
-
-        if (editText != null) {
-            editText.setText(null);
-
-            if (scrollView.getScrollY() == 0) {
-                editText.requestFocus();
-
-                InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
-            } else {
-                scrollView.scrollTo(0, 0);
-            }
-        }
-    }
-
-    public void hideKeyboard() {
-        post(() -> {
-            EditText editText = findViewById(R.id.branchapp_edit_text);
-
-            if (editText != null) {
-                editText.clearFocus();
-
-                InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(editText.getWindowToken(), 0);
-            }
-        });
+    public void notifyOpen(boolean open) {
+        branchSearchFragment.notifyOpen(open);
     }
 
     public boolean isScrolled() {
