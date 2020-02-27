@@ -55,9 +55,7 @@ public class AllAppsContainerView extends RelativeLayout implements DragSource {
     }
 
     public boolean isScrolled() {
-        // TODO need an implementation that works for settings as well.
-        View view = findViewById(R.id.branchapp_results_view);
-        return view == null || view.getScrollY() > 0;
+        return branchSearchFragment.isScrolled();
     }
 
 // empty functions from interfaces
