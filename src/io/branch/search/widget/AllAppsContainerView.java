@@ -55,7 +55,7 @@ public class AllAppsContainerView extends RelativeLayout implements DragSource {
     }
 
     public boolean isScrolled() {
-        return branchSearchFragment.isScrolled();
+        return branchSearchFragment.canScrollUp();
     }
 
 // empty functions from interfaces
