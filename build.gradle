@@ -28,6 +28,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         archivesBaseName = project.name + "-" + rootProject.ext.branch + "-" + versionName
+        manifestPlaceholders = [branchKey: rootProject.ext.branchKey]
     }
     buildTypes {
         debug {
