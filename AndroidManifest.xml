@@ -63,7 +63,7 @@
 
         <meta-data
             android:name="io.branch.sdk.BranchKey"
-            android:value="key_live_ekzqC49363HuS7qlHunMQfnnzyj4F1jr" />
+            android:value="key_live_boJVcFCyjPZB0NubnBQvCcdmvvbTn1kd" />
 
         <!--
         Main launcher activity. When extending only change the name, and keep all the
