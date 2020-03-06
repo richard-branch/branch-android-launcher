@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "32489036352",
+    "firebase_url": "https://branch-ui-sdk.firebaseio.com",
+    "project_id": "branch-ui-sdk",
+    "storage_bucket": "branch-ui-sdk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32489036352:android:d51a9e7a481bcca7f19da5",
+        "android_client_info": {
+          "package_name": "com.android.launcher3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32489036352-a9qj063lgnpff53ffjk7a8amjohe8uvi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpfI65M2W8ZG7lL6rEt1mcBiRdZtc1LZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32489036352-a9qj063lgnpff53ffjk7a8amjohe8uvi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

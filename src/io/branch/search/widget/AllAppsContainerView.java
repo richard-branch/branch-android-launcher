@@ -20,6 +20,10 @@ import com.android.launcher3.ItemInfo;
 import com.android.launcher3.userevent.nano.LauncherLogProto;
 
 import com.android.launcher3.R;
+import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.Map;
 
@@ -61,6 +65,7 @@ public class AllAppsContainerView extends RelativeLayout implements DragSource {
                                       int level,
                                       @NonNull String message,
                                       @Nullable Throwable throwable) {
+                // Log to LogCat
                 switch (level) {
                     case Log.DEBUG: Log.d(tag, message, throwable); break;
                     case Log.VERBOSE: Log.v(tag, message, throwable); break;
@@ -68,11 +73,21 @@ public class AllAppsContainerView extends RelativeLayout implements DragSource {
                     case Log.WARN: Log.w(tag, message, throwable); break;
                     case Log.ERROR: Log.e(tag, message, throwable); break;
                 }
+
+                // Log to Crashlytics
+                Crashlytics.log(level, tag, message);
+                if (throwable != null) {
+                    Crashlytics.logException(throwable);
+                }
             }
         });
         activity.getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, branchSearchFragment)
                 .commit();
+
+        // Set the Crashlytics identifier.
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(result ->
+                Crashlytics.setUserIdentifier(result.getId()));
     }
 
     public void notifyOpen(boolean open) {
