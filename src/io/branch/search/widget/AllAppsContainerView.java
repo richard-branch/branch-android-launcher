@@ -2,10 +2,13 @@ package io.branch.search.widget;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -17,6 +20,8 @@ import com.android.launcher3.ItemInfo;
 import com.android.launcher3.userevent.nano.LauncherLogProto;
 
 import com.android.launcher3.R;
+
+import java.util.Map;
 
 import io.branch.search.widget.app.BranchSearchFragment;
 
@@ -44,7 +49,27 @@ public class AllAppsContainerView extends RelativeLayout implements DragSource {
         AppCompatActivity activity = (AppCompatActivity) getContext();
 
         branchSearchFragment = new BranchSearchFragment();
+        branchSearchFragment.setEventLogger(new IBranchEventLogger() {
+            @Override
+            public void logBranchEvent(@NonNull String name,
+                                       @NonNull Map<String, String> data) {
+                // Do nothing.
+            }
 
+            @Override
+            public void logDebugEvent(@NonNull String tag,
+                                      int level,
+                                      @NonNull String message,
+                                      @Nullable Throwable throwable) {
+                switch (level) {
+                    case Log.DEBUG: Log.d(tag, message, throwable); break;
+                    case Log.VERBOSE: Log.v(tag, message, throwable); break;
+                    case Log.INFO: Log.i(tag, message, throwable); break;
+                    case Log.WARN: Log.w(tag, message, throwable); break;
+                    case Log.ERROR: Log.e(tag, message, throwable); break;
+                }
+            }
+        });
         activity.getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, branchSearchFragment)
                 .commit();
