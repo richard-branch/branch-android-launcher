@@ -49,6 +49,7 @@
     <uses-permission android:name="com.android.launcher3.permission.WRITE_SETTINGS" />
 
     <application
+        android:name=".LauncherApp"
         android:backupAgent="com.android.launcher3.LauncherBackupAgent"
         android:fullBackupOnly="true"
         android:fullBackupContent="@xml/backupscheme"
