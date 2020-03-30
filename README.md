@@ -82,6 +82,9 @@ implementation 'com.squareup.okhttp3:okhttp:3.12.6'
    android:theme="@style/BranchOptIn.Theme" />
    ```
    </li></ol>
+   
+   **Optional but recommended: preload the UI**
+<ol><li>In your application’s onCreate() method, call BranchSearchController.preload(this). This will speed up results during the first display of the UI.</li></ol>
 
 
 ## Code Integration
