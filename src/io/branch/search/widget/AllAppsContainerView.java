@@ -51,7 +51,9 @@ public class AllAppsContainerView extends RelativeLayout implements DragSource {
     }
 
     public void notifyOpen(boolean open) {
-        branchSearchFragment.notifyOpen(open);
+        if (branchSearchFragment != null && branchSearchFragment.getActivity() != null && branchSearchFragment.isAdded()) {
+            branchSearchFragment.notifyOpen(open);
+        }
     }
 
     public boolean isScrolled() {
