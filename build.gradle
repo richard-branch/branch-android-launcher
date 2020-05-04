@@ -16,12 +16,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.protobuf'
 
 android {
-    compileSdkVersion COMPILE_SDK
+    compileSdkVersion 29
     buildToolsVersion BUILD_TOOLS_VERSION
 
     defaultConfig {
         minSdkVersion 25
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -137,6 +137,12 @@ android {
             manifest.srcFile "quickstep/AndroidManifest.xml"
         }
     }
+
+    lintOptions {
+        abortOnError false
+        ignoreWarnings true
+
+    }
 }
 
 repositories {
@@ -144,6 +150,8 @@ repositories {
     maven { url "../../../prebuilts/fullsdk-linux/extras/android/m2repository" }
     mavenCentral()
     google()
+
+    flatDir { dirs 'libs' }
 }
 
 dependencies {
@@ -151,16 +159,20 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:${ANDROID_X_VERSION}"
     implementation "androidx.preference:preference:${ANDROID_X_VERSION}"
     implementation project(':IconLoader')
-    implementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/libs", include: 'launcher_protos.jar')
+//    implementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/libs", include: 'launcher_protos.jar')
 
-    // Recents lib dependency
-    withQuickstepImplementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/quickstep/libs", include: 'sysui_shared.jar')
-
-    // Recents lib dependency for Go
-    withQuickstepIconRecentsImplementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/quickstep/libs", include: 'sysui_shared.jar')
+//    // Recents lib dependency
+//    withQuickstepImplementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/quickstep/libs", include: 'sysui_shared.jar')
+//
+//    // Recents lib dependency for Go
+//    withQuickstepIconRecentsImplementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/quickstep/libs", include: 'sysui_shared.jar')
+    withQuickstepImplementation(name: 'sysui_shared', ext: 'jar')
+    withQuickstepIconRecentsImplementation(name: 'sysui_shared', ext: 'jar')
+    implementation(name: 'launcher_protos', ext: 'jar')
+    withoutQuickstepImplementation(name: 'plugin_core', ext: 'jar')
 
     // Required for AOSP to compile. This is already included in the sysui_shared.jar
-    withoutQuickstepImplementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/libs", include: 'plugin_core.jar')
+//    withoutQuickstepImplementation fileTree(dir: "${FRAMEWORK_PREBUILTS_DIR}/libs", include: 'plugin_core.jar')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation "org.mockito:mockito-core:1.9.5"
