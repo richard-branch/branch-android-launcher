@@ -66,5 +66,13 @@
                 android:value="${packageName}.grid_control" />
         </activity>
 
+        <activity
+            android:name="io.branch.search.widget.optin.BranchOptInActivity"
+            android:theme="@style/BranchOptIn.Theme" />
+
+        <meta-data
+            android:name="io.branch.sdk.BranchKey"
+            android:value="key_live_boJVcFCyjPZB0NubnBQvCcdmvvbTn1kd" />
+
     </application>
 </manifest>

@@ -9,6 +9,8 @@ buildscript {
     }
 }
 
+final String SUPPORT_LIBS_VERSION = '28.0.0'
+
 final String ANDROID_TOP = "${rootDir}/../../.."
 final String FRAMEWORK_PREBUILTS_DIR = "${ANDROID_TOP}/prebuilts/framework_intermediates/"
 
@@ -182,6 +184,25 @@ dependencies {
     androidTestImplementation 'com.android.support.test:rules:1.0.0'
     androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
     androidTestImplementation "androidx.annotation:annotation:${ANDROID_X_VERSION}"
+
+
+    // Branch UI library
+    implementation(name: 'branchuisdk-release', ext: 'aar')
+
+    // Branch UI dependencies - Android
+    implementation "com.android.support:design:${SUPPORT_LIBS_VERSION}"
+    implementation "com.android.support:appcompat-v7:${SUPPORT_LIBS_VERSION}"
+    implementation "com.android.support:preference-v7:${SUPPORT_LIBS_VERSION}"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'androidx.room:room-runtime:2.2.0'
+    annotationProcessor 'androidx.room:room-compiler:2.2.0'
+
+    // Branch UI dependencies - other
+    implementation 'io.branch.sdk.android:search:1.5.1'
+    implementation 'com.facebook.fresco:fresco:1.12.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.6'
 }
 
 protobuf {
