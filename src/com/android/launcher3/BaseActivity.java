@@ -30,6 +30,7 @@ import android.view.ContextThemeWrapper;
 import androidx.annotation.IntDef;
 
 import com.android.launcher3.DeviceProfile.OnDeviceProfileChangeListener;
+import io.branch.search.widget.AllAppsContainerView;
 import com.android.launcher3.logging.StatsLogManager;
 import com.android.launcher3.logging.StatsLogUtils;
 import com.android.launcher3.logging.StatsLogUtils.LogStateProvider;
@@ -46,7 +47,7 @@ import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.util.ArrayList;
 
-public abstract class BaseActivity extends Activity
+public abstract class BaseActivity extends androidx.appcompat.app.AppCompatActivity
         implements UserEventDelegate, LogStateProvider, ActivityContext {
 
     public static final int INVISIBLE_BY_STATE_HANDLER = 1 << 0;
@@ -80,6 +81,8 @@ public abstract class BaseActivity extends Activity
     protected UserEventDispatcher mUserEventDispatcher;
     protected StatsLogManager mStatsLogManager;
     protected SystemUiController mSystemUiController;
+
+    protected io.branch.search.widget.AllAppsContainerView appsContainerView;
 
     private static final int ACTIVITY_STATE_STARTED = 1 << 0;
     private static final int ACTIVITY_STATE_RESUMED = 1 << 1;

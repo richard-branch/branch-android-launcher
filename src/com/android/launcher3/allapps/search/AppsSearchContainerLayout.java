@@ -42,7 +42,7 @@ import com.android.launcher3.Insettable;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.R;
 import com.android.launcher3.Utilities;
-import com.android.launcher3.allapps.AllAppsContainerView;
+import io.branch.search.widget.AllAppsContainerView;
 import com.android.launcher3.allapps.AllAppsStore;
 import com.android.launcher3.allapps.AlphabeticalAppsList;
 import com.android.launcher3.allapps.SearchUiManager;
@@ -65,7 +65,7 @@ public class AppsSearchContainerLayout extends ExtendedEditText
     private final SpannableStringBuilder mSearchQueryBuilder;
 
     private AlphabeticalAppsList mApps;
-    private AllAppsContainerView mAppsView;
+    private io.branch.search.widget.AllAppsContainerView mAppsView;
 
     // This value was used to position the QSB. We store it here for translationY animations.
     private final float mFixedTranslationY;
@@ -97,29 +97,30 @@ public class AppsSearchContainerLayout extends ExtendedEditText
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        mLauncher.getAppsView().getAppsStore().addUpdateListener(this);
+//        mLauncher.getAppsView().getAppsStore().addUpdateListener(this);
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        mLauncher.getAppsView().getAppsStore().removeUpdateListener(this);
+//        mLauncher.getAppsView().getAppsStore().removeUpdateListener(this);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // Update the width to match the grid padding
-        DeviceProfile dp = mLauncher.getDeviceProfile();
-        int myRequestedWidth = getSize(widthMeasureSpec);
-        int rowWidth = myRequestedWidth - mAppsView.getActiveRecyclerView().getPaddingLeft()
-                - mAppsView.getActiveRecyclerView().getPaddingRight();
-
-        int cellWidth = DeviceProfile.calculateCellWidth(rowWidth, dp.inv.numHotseatIcons);
-        int iconVisibleSize = Math.round(ICON_VISIBLE_AREA_FACTOR * dp.iconSizePx);
-        int iconPadding = cellWidth - iconVisibleSize;
-
-        int myWidth = rowWidth - iconPadding + getPaddingLeft() + getPaddingRight();
-        super.onMeasure(makeMeasureSpec(myWidth, EXACTLY), heightMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//        // Update the width to match the grid padding
+//        DeviceProfile dp = mLauncher.getDeviceProfile();
+//        int myRequestedWidth = getSize(widthMeasureSpec);
+//        int rowWidth = myRequestedWidth - mAppsView.getActiveRecyclerView().getPaddingLeft()
+//                - mAppsView.getActiveRecyclerView().getPaddingRight();
+//
+//        int cellWidth = DeviceProfile.calculateCellWidth(rowWidth, dp.inv.numHotseatIcons);
+//        int iconVisibleSize = Math.round(ICON_VISIBLE_AREA_FACTOR * dp.iconSizePx);
+//        int iconPadding = cellWidth - iconVisibleSize;
+//
+//        int myWidth = rowWidth - iconPadding + getPaddingLeft() + getPaddingRight();
+//        super.onMeasure(makeMeasureSpec(myWidth, EXACTLY), heightMeasureSpec);
     }
 
     @Override
@@ -137,10 +138,10 @@ public class AppsSearchContainerLayout extends ExtendedEditText
 
     @Override
     public void initialize(AllAppsContainerView appsView) {
-        mApps = appsView.getApps();
+//        mApps = appsView.getApps();
         mAppsView = appsView;
-        mSearchBarController.initialize(
-                new DefaultAppSearchAlgorithm(mApps.getApps()), this, mLauncher, this);
+//        mSearchBarController.initialize(
+//                new DefaultAppSearchAlgorithm(mApps.getApps()), this, mLauncher, this);
     }
 
     @Override

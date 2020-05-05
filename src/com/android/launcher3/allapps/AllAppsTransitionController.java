@@ -16,6 +16,7 @@ import static com.android.launcher3.util.SystemUiController.UI_STATE_ALL_APPS;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.util.FloatProperty;
+import android.view.View;
 import android.view.animation.Interpolator;
 
 import com.android.launcher3.DeviceProfile;
@@ -63,7 +64,7 @@ public class AllAppsTransitionController implements StateHandler, OnDeviceProfil
 
     private static final int APPS_VIEW_ALPHA_CHANNEL_INDEX = 0;
 
-    private AllAppsContainerView mAppsView;
+    private io.branch.search.widget.AllAppsContainerView mAppsView;
     private ScrimView mScrimView;
 
     private final Launcher mLauncher;
@@ -101,7 +102,7 @@ public class AllAppsTransitionController implements StateHandler, OnDeviceProfil
         setScrollRangeDelta(mScrollRangeDelta);
 
         if (mIsVerticalLayout) {
-            mAppsView.getAlphaProperty(APPS_VIEW_ALPHA_CHANNEL_INDEX).setValue(1);
+//            mAppsView.getAlphaProperty(APPS_VIEW_ALPHA_CHANNEL_INDEX).setValue(1);
             mLauncher.getHotseat().setTranslationY(0);
             mLauncher.getWorkspace().getPageIndicator().setTranslationY(0);
         }
@@ -122,6 +123,7 @@ public class AllAppsTransitionController implements StateHandler, OnDeviceProfil
         float shiftCurrent = progress * mShiftRange;
 
         mAppsView.setTranslationY(shiftCurrent);
+        mAppsView.notifyOpen(mProgress == 0F);
 
         // Use a light system UI (dark icons) if all apps is behind at least half of the
         // status bar.
@@ -200,11 +202,11 @@ public class AllAppsTransitionController implements StateHandler, OnDeviceProfil
 
         Interpolator allAppsFade = builder.getInterpolator(ANIM_ALL_APPS_FADE, LINEAR);
         Interpolator headerFade = builder.getInterpolator(ANIM_ALL_APPS_HEADER_FADE, allAppsFade);
-        setter.setViewAlpha(mAppsView.getContentView(), hasAllAppsContent ? 1 : 0, allAppsFade);
-        setter.setViewAlpha(mAppsView.getScrollBar(), hasAllAppsContent ? 1 : 0, allAppsFade);
-        mAppsView.getFloatingHeaderView().setContentVisibility(hasHeaderExtra, hasAllAppsContent,
-                setter, headerFade, allAppsFade);
-        mAppsView.getSearchUiManager().setContentVisibility(visibleElements, setter, allAppsFade);
+//        setter.setViewAlpha(mAppsView.getContentView(), hasAllAppsContent ? 1 : 0, allAppsFade);
+//        setter.setViewAlpha(mAppsView.getScrollBar(), hasAllAppsContent ? 1 : 0, allAppsFade);
+//        mAppsView.getFloatingHeaderView().setContentVisibility(hasHeaderExtra, hasAllAppsContent,
+//                setter, headerFade, allAppsFade);
+//        mAppsView.getSearchUiManager().setContentVisibility(visibleElements, setter, allAppsFade);
 
         setter.setInt(mScrimView, ScrimView.DRAG_HANDLE_ALPHA,
                 (visibleElements & VERTICAL_SWIPE_INDICATOR) != 0 ? 255 : 0, allAppsFade);
@@ -219,7 +221,7 @@ public class AllAppsTransitionController implements StateHandler, OnDeviceProfil
         };
     }
 
-    public void setupViews(AllAppsContainerView appsView) {
+    public void setupViews(io.branch.search.widget.AllAppsContainerView appsView) {
         mAppsView = appsView;
         mScrimView = mLauncher.findViewById(R.id.scrim_view);
     }
@@ -247,6 +249,18 @@ public class AllAppsTransitionController implements StateHandler, OnDeviceProfil
             mAppsView.onScrollUpEnd();
         }
     }
+//
+//    private void onProgressAnimationEnd() {
+//        if (Float.compare(mProgress, 1f) == 0) {
+//            mAppsView.setVisibility(View.INVISIBLE);
+//            mAppsView.reset(false);
+//        } else if (Float.compare(mProgress, 0f) == 0) {
+//            mAppsView.setVisibility(View.VISIBLE);
+//            mAppsView.onScrollUpEnd();
+//        } else {
+//            mAppsView.setVisibility(View.VISIBLE);
+//        }
+//    }
 
     private boolean isAllAppsExpanded() {
         return Float.compare(mProgress, 0f) == 0;

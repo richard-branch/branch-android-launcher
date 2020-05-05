@@ -96,32 +96,6 @@ public class TestInformationHandler implements ResourceBasedOverride {
                 TestProtocol.sDebugTracing = false;
                 break;
 
-            case TestProtocol.REQUEST_FREEZE_APP_LIST:
-                MAIN_EXECUTOR.execute(() ->
-                        mLauncher.getAppsView().getAppsStore().enableDeferUpdates(
-                                AllAppsStore.DEFER_UPDATES_TEST));
-                break;
-
-            case TestProtocol.REQUEST_UNFREEZE_APP_LIST:
-                MAIN_EXECUTOR.execute(() ->
-                        mLauncher.getAppsView().getAppsStore().disableDeferUpdates(
-                                AllAppsStore.DEFER_UPDATES_TEST));
-                break;
-
-            case TestProtocol.REQUEST_APP_LIST_FREEZE_FLAGS: {
-                try {
-                    final int deferUpdatesFlags = MAIN_EXECUTOR.submit(() ->
-                            mLauncher.getAppsView().getAppsStore().getDeferUpdatesFlags()).get();
-                    response.putInt(TestProtocol.TEST_INFO_RESPONSE_FIELD,
-                            deferUpdatesFlags);
-                } catch (ExecutionException e) {
-                    throw new RuntimeException(e);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                break;
-            }
-
             case TestProtocol.REQUEST_TOTAL_PSS_KB: {
                 Debug.MemoryInfo mem = new Debug.MemoryInfo();
                 Debug.getMemoryInfo(mem);
@@ -157,6 +131,8 @@ public class TestInformationHandler implements ResourceBasedOverride {
                         mDeviceProfile.allAppsCellHeightPx);
                 break;
             }
+            default:
+                break;
         }
         return response;
     }

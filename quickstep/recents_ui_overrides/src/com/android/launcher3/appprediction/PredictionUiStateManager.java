@@ -38,7 +38,7 @@ import com.android.launcher3.LauncherSettings;
 import com.android.launcher3.LauncherState;
 import com.android.launcher3.LauncherStateManager.StateListener;
 import com.android.launcher3.Utilities;
-import com.android.launcher3.allapps.AllAppsContainerView;
+import io.branch.search.widget.AllAppsContainerView;
 import com.android.launcher3.allapps.AllAppsStore.OnUpdateListener;
 import com.android.launcher3.icons.IconCache;
 import com.android.launcher3.icons.IconCache.ItemInfoUpdateReceiver;

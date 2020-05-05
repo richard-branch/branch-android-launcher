@@ -176,7 +176,7 @@ public class FloatingHeaderView extends LinearLayout implements
         updateExpectedHeight();
 
         if (mMaxTranslation != oldMaxHeight) {
-            AllAppsContainerView parent = (AllAppsContainerView) getParent();
+            io.branch.search.widget.AllAppsContainerView parent = (io.branch.search.widget.AllAppsContainerView) getParent();
             if (parent != null) {
                 parent.setupHeader();
             }
@@ -192,7 +192,7 @@ public class FloatingHeaderView extends LinearLayout implements
         onHeightUpdated();
     }
 
-    public void setup(AllAppsContainerView.AdapterHolder[] mAH, boolean tabsHidden) {
+    public void setup(io.branch.search.widget.AllAppsContainerView.AdapterHolder[] mAH, boolean tabsHidden) {
         for (FloatingHeaderRow row : mAllRows) {
             row.setup(this, mAllRows, tabsHidden);
         }
@@ -200,8 +200,8 @@ public class FloatingHeaderView extends LinearLayout implements
 
         mTabsHidden = tabsHidden;
         mTabLayout.setVisibility(tabsHidden ? View.GONE : View.VISIBLE);
-        mMainRV = setupRV(mMainRV, mAH[AllAppsContainerView.AdapterHolder.MAIN].recyclerView);
-        mWorkRV = setupRV(mWorkRV, mAH[AllAppsContainerView.AdapterHolder.WORK].recyclerView);
+        mMainRV = setupRV(mMainRV, mAH[io.branch.search.widget.AllAppsContainerView.AdapterHolder.MAIN].recyclerView);
+        mWorkRV = setupRV(mWorkRV, mAH[io.branch.search.widget.AllAppsContainerView.AdapterHolder.WORK].recyclerView);
         mParent = (ViewGroup) mMainRV.getParent();
         setMainActive(mMainRVActive || mWorkRV == null);
         reset(false);

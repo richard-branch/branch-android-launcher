@@ -67,7 +67,7 @@
 
         <include
             android:id="@+id/apps_view"
-            layout="@layout/all_apps"
+            layout="@layout/branch_apps_drawer"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

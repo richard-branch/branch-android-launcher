@@ -52,7 +52,7 @@ public class PersonalWorkSlidingTabStrip extends LinearLayout implements PageInd
     private float mScrollOffset;
     private int mSelectedPosition = 0;
 
-    private AllAppsContainerView mContainerView;
+    private io.branch.search.widget.AllAppsContainerView mContainerView;
     private int mLastActivePage = 0;
     private boolean mIsRtl;
 
@@ -163,7 +163,7 @@ public class PersonalWorkSlidingTabStrip extends LinearLayout implements PageInd
         mLastActivePage = activePage;
     }
 
-    public void setContainerView(AllAppsContainerView containerView) {
+    public void setContainerView(io.branch.search.widget.AllAppsContainerView containerView) {
         mContainerView = containerView;
     }
 

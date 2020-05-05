@@ -83,7 +83,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.launcher3.DropTarget.DragObject;
 import com.android.launcher3.accessibility.LauncherAccessibilityDelegate;
-import com.android.launcher3.allapps.AllAppsContainerView;
+import io.branch.search.widget.AllAppsContainerView;
 import com.android.launcher3.allapps.AllAppsStore;
 import com.android.launcher3.allapps.AllAppsTransitionController;
 import com.android.launcher3.allapps.DiscoveryBounce;
@@ -240,7 +240,7 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
 
     // Main container view for the all apps screen.
     @Thunk
-    AllAppsContainerView mAppsView;
+    io.branch.search.widget.AllAppsContainerView mAppsView;
     AllAppsTransitionController mAllAppsController;
 
     // Scrim view for the all apps and overview state.
@@ -403,12 +403,12 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
             public void onStateTransitionComplete(LauncherState finalState) {
                 float alpha = 1f - mCurrentAssistantVisibility;
                 if (finalState == NORMAL) {
-                    mAppsView.getAlphaProperty(APPS_VIEW_ALPHA_CHANNEL_INDEX).setValue(alpha);
+//                    mAppsView.getAlphaProperty(APPS_VIEW_ALPHA_CHANNEL_INDEX).setValue(alpha);
                 } else if (finalState == OVERVIEW || finalState == OVERVIEW_PEEK) {
-                    mAppsView.getAlphaProperty(APPS_VIEW_ALPHA_CHANNEL_INDEX).setValue(alpha);
+//                    mAppsView.getAlphaProperty(APPS_VIEW_ALPHA_CHANNEL_INDEX).setValue(alpha);
                     mScrimView.getAlphaProperty(SCRIM_VIEW_ALPHA_CHANNEL_INDEX).setValue(alpha);
                 } else {
-                    mAppsView.getAlphaProperty(APPS_VIEW_ALPHA_CHANNEL_INDEX).setValue(1f);
+//                    mAppsView.getAlphaProperty(APPS_VIEW_ALPHA_CHANNEL_INDEX).setValue(1f);
                     mScrimView.getAlphaProperty(SCRIM_VIEW_ALPHA_CHANNEL_INDEX).setValue(1f);
                 }
             }
@@ -494,9 +494,9 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
         float alpha = 1f - visibility;
         LauncherState state = mStateManager.getState();
         if (state == NORMAL) {
-            mAppsView.getAlphaProperty(APPS_VIEW_ALPHA_CHANNEL_INDEX).setValue(alpha);
+//            mAppsView.getAlphaProperty(APPS_VIEW_ALPHA_CHANNEL_INDEX).setValue(alpha);
         } else if (state == OVERVIEW || state == OVERVIEW_PEEK) {
-            mAppsView.getAlphaProperty(APPS_VIEW_ALPHA_CHANNEL_INDEX).setValue(alpha);
+//            mAppsView.getAlphaProperty(APPS_VIEW_ALPHA_CHANNEL_INDEX).setValue(alpha);
             mScrimView.getAlphaProperty(SCRIM_VIEW_ALPHA_CHANNEL_INDEX).setValue(alpha);
         }
     }
@@ -794,6 +794,7 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
     @Override
     public void onActivityResult(
             final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         mPendingActivityRequestCode = -1;
         handleActivityResult(requestCode, resultCode, data);
         if (mLauncherCallbacks != null) {
@@ -1302,7 +1303,7 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
 
     public void updateNotificationDots(Predicate<PackageUserKey> updatedDots) {
         mWorkspace.updateNotificationDots(updatedDots);
-        mAppsView.getAppsStore().updateNotificationDots(updatedDots);
+//        mAppsView.getAppsStore().updateNotificationDots(updatedDots);
     }
 
     @Override
@@ -1337,7 +1338,7 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
         return mDragLayer;
     }
 
-    public AllAppsContainerView getAppsView() {
+    public io.branch.search.widget.AllAppsContainerView getAppsView() {
         return mAppsView;
     }
 
@@ -1930,9 +1931,9 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
             mPendingExecutor.markCompleted();
             mPendingExecutor = null;
 
-            // We might have set this flag previously and forgot to clear it.
-            mAppsView.getAppsStore()
-                    .disableDeferUpdatesSilently(AllAppsStore.DEFER_UPDATES_NEXT_DRAW);
+//            // We might have set this flag previously and forgot to clear it.
+//            mAppsView.getAppsStore()
+//                    .disableDeferUpdatesSilently(AllAppsStore.DEFER_UPDATES_NEXT_DRAW);
         }
     }
 
@@ -2297,9 +2298,9 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
         clearPendingBinds();
         mPendingExecutor = executor;
         if (!isInState(ALL_APPS)) {
-            mAppsView.getAppsStore().enableDeferUpdates(AllAppsStore.DEFER_UPDATES_NEXT_DRAW);
-            mPendingExecutor.execute(() -> mAppsView.getAppsStore().disableDeferUpdates(
-                    AllAppsStore.DEFER_UPDATES_NEXT_DRAW));
+//            mAppsView.getAppsStore().enableDeferUpdates(AllAppsStore.DEFER_UPDATES_NEXT_DRAW);
+//            mPendingExecutor.execute(() -> mAppsView.getAppsStore().disableDeferUpdates(
+//                    AllAppsStore.DEFER_UPDATES_NEXT_DRAW));
         }
 
         executor.attachTo(this);
@@ -2382,7 +2383,7 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
      * Implementation of the method from LauncherModel.Callbacks.
      */
     public void bindAllApplications(AppInfo[] apps) {
-        mAppsView.getAppsStore().setApps(apps);
+//        mAppsView.getAppsStore().setApps(apps);
     }
 
     /**
@@ -2396,7 +2397,7 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
 
     @Override
     public void bindPromiseAppProgressUpdated(PromiseAppInfo app) {
-        mAppsView.getAppsStore().updatePromiseAppProgress(app);
+//        mAppsView.getAppsStore().updatePromiseAppProgress(app);
     }
 
     @Override

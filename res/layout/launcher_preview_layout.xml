@@ -36,7 +36,7 @@
         android:theme="@style/HomeScreenElementTheme"
         launcher:containerType="hotseat" />
 
-    <com.android.launcher3.InsettableFrameLayout
+    <io.branch.search.widget.AllAppsContainerView
         android:id="@+id/apps_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
@@ -45,6 +45,6 @@
             android:id="@id/search_container_all_apps"
             layout="@layout/search_container_all_apps"/>
 
-    </com.android.launcher3.InsettableFrameLayout>
+    </io.branch.search.widget.AllAppsContainerView>
 
 </com.android.launcher3.InsettableFrameLayout>
